@@ -18,7 +18,7 @@ ScalarConverter::ScalarConverter(void)
 ScalarConverter::ScalarConverter(const ScalarConverter &other)
 {
 	std::cout << "Copy constructor called\n";
-	(void)other;
+	*this = other;
 }
 
 // Assignment operator overload
@@ -131,7 +131,7 @@ bool ScalarConverter::isNum(const std::string &literal)
 			return false;
 		}
 	}
-	return literal.length() != 1;
+	return literal.length() > static_cast<size_t>(signBit);
 }
 
 bool ScalarConverter::isFloat(const std::string &literal)
@@ -172,7 +172,7 @@ bool ScalarConverter::isFloat(const std::string &literal)
 			}
 		}
 	}
-	return floatLength > signBit && dotCount == 1;
+	return floatLength > static_cast<size_t>(signBit) && dotCount == 1;
 }
 
 ScalarConverter::LiteralType ScalarConverter::detectType(const std::string &literal)
@@ -201,7 +201,6 @@ ScalarConverter::LiteralType ScalarConverter::detectType(const std::string &lite
 	{
 		return DOUBLE;
 	}
-
 	return INVALID;
 }
 
