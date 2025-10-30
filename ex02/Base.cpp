@@ -3,6 +3,7 @@
 #include "B.hpp"
 #include "C.hpp"
 #include <cstdlib>
+#include <exception>
 #include <iostream>
 
 Base::~Base()
@@ -39,6 +40,8 @@ void Base::identify(Base *basePtr)
 	else if (dynamic_cast<C *>(basePtr))
 	{
 		std::cout << "C\n";
+	} else {
+		std::cerr << "cast failed. NULL?\n";
 	}
 }
 
@@ -52,6 +55,7 @@ void Base::identify(Base &baseRef)
 	}
 	catch (...)
 	{
+		std::cerr << "cast failed\n";
 	}
 
 	try
@@ -62,6 +66,7 @@ void Base::identify(Base &baseRef)
 	}
 	catch (...)
 	{
+		std::cerr << "cast failed\n";
 	}
 
 	try
@@ -72,5 +77,6 @@ void Base::identify(Base &baseRef)
 	}
 	catch (...)
 	{
+		std::cerr << "cast failed\n";
 	}
 }
